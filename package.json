@@ -1,0 +1,19 @@
+{
+    "name": "sfmc-genesys",
+    "version": "1.0.0",
+    "main": "custom_activity.js",
+    "scripts": {
+      "start": "node custom_activity.js"
+    },
+    "keywords": [],
+    "author": "Bhupendra Singh",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+      "body-parser": "^1.20.3",
+      "cors": "^2.8.5",
+      "express": "^4.21.2",
+      "path": "^0.12.7",
+      "request-promise-native": "^1.0.9"
+    }
+  }

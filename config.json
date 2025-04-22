@@ -7,8 +7,8 @@
     "type": "REST",
     "lang": {
        "en-US": {
-           "name": "Genesys Custom Activity",
-           "description": "genesys custom activity"
+           "name": "Genesys Custom Activity V1",
+           "description": "genesys custom activity V1"
        }
     },
     "arguments": {

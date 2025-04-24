@@ -15,7 +15,7 @@
         "execute": {
             "inArguments": [
                 {
-                  "viberID": "{{Contact.Attribute.Genesy_POC.Phone}}"
+                  "phoneNumber": "{{Contact.Default.PhoneNumber}}"
                 }               
             ],
             "outArguments": [],
@@ -30,40 +30,20 @@
     "configurationArguments": {
       "applicationExtensionKey": "1f2c1278-cdad-4b88-8382-c21f8436e47d",
        "save": {
-           "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/journeybuilder/save",
-            "verb": "POST",
-            "body": "",
-            "format": "json",
-            "useJwt": false,
-            "timeout": 2000
+           "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/journeybuilder/save"
        },
        "publish": {
-           "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/journeybuilder/publish",
-            "verb": "POST",
-            "body": "",
-            "format": "json",
-            "useJwt": false,
-            "timeout": 2000
+           "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/journeybuilder/publish"
        },
        "validate": {
-           "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/journeybuilder/validate",
-            "verb": "POST",
-            "body": "",
-            "format": "json",
-            "useJwt": false,
-            "timeout": 2000
+           "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/journeybuilder/validate"
        },
        "stop": {
-           "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/journeybuilder/stop",
-            "verb": "POST",
-            "body": "",
-            "format": "json",
-            "useJwt": false,
-            "timeout": 2000
+           "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/journeybuilder/stop"
        }
     },
     "wizardSteps": [
-       { "label": "Create SMS Message", "key": "step1" }
+      { "label": "messageBody", "key": "messageBody" } 
     ],
     "userInterfaces": {
        "configModal": {
@@ -98,7 +78,7 @@
                         }
                     },                    
                     {
-                        "to": {
+                        "phoneNumber": {
                             "dataType": "Phone",
                             "isNullable": false,
                             "direction": "out"   
@@ -110,14 +90,8 @@
                             "isNullable": false,
                             "direction": "out"   
                         }
-                    },                    
-                    {
-                        "email": {
-                            "dataType": "Email",
-                            "isNullable": true,
-                            "direction": "out"
-                        }
-                    }
+                    }                 
+                    
                 ],
                 "outArguments": []
             }

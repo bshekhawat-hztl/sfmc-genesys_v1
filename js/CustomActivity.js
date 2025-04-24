@@ -1,15 +1,11 @@
-define([
-    'postmonger'
-], function(
-    Postmonger
-) {
+define(['postmonger'], function(Postmonger) {
     'use strict';
 
     var connection = new Postmonger.Session();
     var payload = {};
     var lastStepEnabled = false;
     var steps = [ // initialize to the same value as what's set in config.json for consistency
-        { "label": "Create SMS Message", "key": "step1" }
+        { "label": "messageBody", "key": "messageBody" }
     ];
     var currentStep = steps[0].key;
 
@@ -25,16 +21,17 @@ define([
 console.log("Execution flow 1");  
 
     function onRender() {
-        console.log("Execution flow 2");  
+
+        console.log("Execution flow 4"); 
+         
         // JB will respond the first time 'ready' is called with 'initActivity'
         connection.trigger('ready');
-        console.log("Execution flow 3");  
         connection.trigger('requestTokens');
-        console.log("Execution flow 4");  
         connection.trigger('requestEndpoints');
         console.log("Execution flow 5"); 
     }
 console.log("Execution flow 6"); 
+
   function initialize(data) {
        console.log("Initializing data data: "+ JSON.stringify(data));
       console.log("Execution flow 7"); 
@@ -42,7 +39,7 @@ console.log("Execution flow 6");
             console.log("Execution flow 8:"); 
             payload = data;
             console.log("Execution flow 9: ",payload); 
-        }    
+        } 
 console.log("Execution flow 10"); 
         var hasInArguments = Boolean(
             payload['arguments'] &&

@@ -26,9 +26,9 @@ if ('development' == app.get('env')) {
 }
 
 // HubExchange Routes
-app.get('/', routes.index );
-app.post('/login', routes.login );
-app.post('/logout', routes.logout );
+//app.get('/', routes.index );
+//app.post('/login', routes.login );
+//app.post('/logout', routes.logout );
 
 // Custom Hello World Activity Routes
 app.post('/journeybuilder/save/', activity.save );

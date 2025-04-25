@@ -1,3 +1,5 @@
+console.log('🔌 customActivity.js loaded');
+
 define(['postmonger'], function(Postmonger) {
     'use strict';
   

@@ -1,9 +1,9 @@
 {
     "name": "sfmc-genesys-v1",
     "version": "1.0.0",
-    "main": "CustomActivity.js",
+    "main": "app.js",
     "scripts": {
-      "start": "node CustomActivity.js"
+      "start": "node app.js"
     },
     "keywords": [],
     "author": "Bhupendra Singh",

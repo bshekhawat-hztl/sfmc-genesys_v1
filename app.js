@@ -27,7 +27,7 @@ app.get('/config.json', (req, res) => {
 });
 
 // Serve the activity UI
-app.get('/activity', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 

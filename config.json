@@ -65,7 +65,6 @@
     ],
     "userInterfaces": {
        "configModal": {
-           "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/activity",
            "height": 600,
            "width": 800,
            "fullscreen": false

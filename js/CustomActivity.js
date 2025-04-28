@@ -50,7 +50,7 @@ define(['postmonger'], function(Postmonger) {
         });
     }
   
-    /*
+    
     function initialize(data) {
       payload = data || {};
 
@@ -68,7 +68,7 @@ define(['postmonger'], function(Postmonger) {
         text: 'done',
         visible: true
       });
-    } */
+    } 
   
     function save() {
       const phoneNumber = $('#messagingService').val();

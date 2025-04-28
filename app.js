@@ -41,7 +41,7 @@ console.log("Execution flow app 1:");
 
 // Lifecycle endpoints required by SFMC
 app.post('/save',     (req, res) => res.status(200).json({ message: 'Save successful' }));
-console.log("Execution flow 4:"+message); 
+console.log("Execution flow 4"); 
 
 app.post('/publish',  (req, res) => res.status(200).json({ message: 'Publish successful' }));
 app.post('/validate', (req, res) => res.status(200).json({ message: 'Validation successful' }));

@@ -14,10 +14,10 @@
     "arguments": {
         "execute": {
             "inArguments": [
-                { "accountSid": "" },
-                { "authToken": "" },
-                { "messagingService": "" },
-                { "body": "" }               
+                { "responseId": "" },
+                { "phone": "" },
+                { "sessionId": "" },
+                { "contactId": "" }          
             ],
             "outArguments": [],
             "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/execute",
@@ -69,43 +69,5 @@
            "width": 800,
            "fullscreen": false
        }
-    },
-    "schema": {
-        "arguments": {
-            "execute": {
-                "inArguments": [
-                    {
-                        "accountSid": {
-                            "dataType": "String",
-                            "isNullable": false,
-                            "direction": "out"   
-                        }
-                    },                    
-                    {
-                        "authToken": {
-                            "dataType": "String",
-                            "isNullable": false,
-                            "direction": "out"   
-                        }
-                    },                    
-                    {
-                        "messagingService": {
-                            "dataType": "Phone",
-                            "isNullable": true,
-                            "direction": "out"   
-                        }
-                    },                    
-                    {
-                        "body": {
-                            "dataType": "String",
-                            "isNullable": false,
-                            "direction": "out"   
-                        }
-                    }                 
-                    
-                ],
-                "outArguments": []
-            }
-        }
     }
 }

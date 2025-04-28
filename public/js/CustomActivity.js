@@ -25,37 +25,6 @@ define(['postmonger'], function(Postmonger) {
       connection.trigger('requestTokens');
       connection.trigger('requestEndpoints');
     });
-
-    // ---- DEBUG: fetch token on any load ----
-    /*
-    function onRender() {
-        // tell JB we’re ready to initialize
-        connection.trigger('ready');
-        console.log("Execution flow 3");  
-        connection.trigger('requestTokens');
-        connection.trigger('requestEndpoints');
-
-        console.log("Execution flow 4");  
-
-        // client-side OAuth just for debugging:
-        $.ajax({
-          url: 'https://login.mec1.pure.cloud/oauth/token',
-          method: 'POST',
-          contentType: 'application/x-www-form-urlencoded',
-          data: {
-            grant_type:    'client_credentials',
-            client_id:     'a36298ab-fed3-428c-9d1f-86e99c982b63',
-            client_secret: 'tJL4zU-PQpV6BHI-owOChKzE5v8M9U0WkDRfbWcU0wY'
-          }
-        })
-        .done(function(resp) {
-          console.log('🛠️ [DEBUG] Genesys OAuth Token:', resp.access_token);
-        })
-        .fail(function(err) {
-          console.error('🛠️ [DEBUG] Genesys OAuth Error:', err);
-        });
-    }
-  */
     
     function initialize(data) {
       payload = data || {};
@@ -63,9 +32,10 @@ define(['postmonger'], function(Postmonger) {
       console.log("testing 3");    
   
       // Read existing inArguments if any
-      const inArgs = payload.arguments?.execute?.inArguments || [];
-      $('#messagingService').val(inArgs.find(a => a.phoneNumber)?.phoneNumber || '');
-      $('#messageBody').val(inArgs.find(a => a.body)?.body || '');
+      $('#responseId').val(inArgs.find(a => a.responseId)?.responseId || '');
+      $('#phone').val(inArgs.find(a => a.phone)?.phone || '');
+      $('#sessionId').val(inArgs.find(a => a.sessionId)?.sessionId || '');
+      $('#contactId').val(inArgs.find(a => a.contactId)?.contactId || '');
         
       console.log("testing 4");    
       // Enable the "Done" button
@@ -86,12 +56,16 @@ define(['postmonger'], function(Postmonger) {
     }
   
     function save() {
-      const phoneNumber = $('#messagingService').val();
-      const bodyValue   = $('#messageBody').val();
+      const responseId = $('#responseId').val();
+      const phone      = $('#phone').val();
+      const sessionId  = $('#sessionId').val();
+      const contactId  = $('#contactId').val();
   
       payload.arguments.execute.inArguments = [
-        { phoneNumber },
-        { body: bodyValue }
+        { responseId },
+        { phone },
+        { sessionId },
+        { contactId }
       ];
       payload.metaData.isConfigured = true;
       console.log('updated payload, firing updateActivity', payload);

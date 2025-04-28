@@ -3,13 +3,14 @@ const bodyParser = require('body-parser');
 const request = require('request-promise-native');
 const path = require('path');
 const routes = require('./routes');
+const activity = require('./routes/activity');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Serve static UI and assets
+app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json());
 
 // Apply security headers for framing in Journey Builder
 app.use((req, res, next) => {
@@ -40,13 +41,17 @@ app.post('/logout', routes.logout);
 console.log("Execution flow app 1:"); 
 
 // Lifecycle endpoints required by SFMC
-app.post('/save',     (req, res) => res.status(200).json({ message: 'Save successful' }));
-console.log("Execution flow 4"); 
 
-app.post('/publish',  (req, res) => res.status(200).json({ message: 'Publish successful' }));
-app.post('/validate', (req, res) => res.status(200).json({ message: 'Validation successful' }));
+app.post('/save',     activity.save);
+app.post('/validate', activity.validate);
+app.post('/publish',  activity.publish);
+app.post('/execute',  activity.execute);
 
 // Execute activity: called at runtime by SFMC Journey
+
+
+
+/*
 app.post('/execute', async (req, res) => {
   try {
     // Extract inArguments (phoneNumber, messageBody, etc.)
@@ -97,7 +102,8 @@ app.post('/execute', async (req, res) => {
     console.error('Error executing activity:', err.message || err);
     res.sendStatus(500);
   }
-});
+}); 
+*/
 
 // Start server
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

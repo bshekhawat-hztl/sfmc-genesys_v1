@@ -8,9 +8,15 @@
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/require.js"></script>
     <script>
-        require({
+        // Tell RequireJS where to find your modules
+        requirejs.config({
           baseUrl: 'js'
-        }, ['customActivity']);
+        });
+    
+        // Load your custom activity (and its dependencies postmonger.js)
+        require(['CustomActivity'], function () {
+          console.log('CustomActivity module loaded');
+        });
       </script>
 
     <!--Styles-->

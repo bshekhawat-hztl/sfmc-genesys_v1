@@ -19,12 +19,17 @@ define(['postmonger'], function(Postmonger) {
     connection.on('requestedTokens',   onGetTokens);
     connection.on('requestedEndpoints',onGetEndpoints);
 
+    console.log("Execution flow 2");  
+
     // ---- DEBUG: fetch token on any load ----
     function onRender() {
         // tell JB we’re ready to initialize
         connection.trigger('ready');
+        console.log("Execution flow 3");  
         connection.trigger('requestTokens');
         connection.trigger('requestEndpoints');
+
+        console.log("Execution flow 4");  
 
         // client-side OAuth just for debugging:
         $.ajax({
@@ -45,6 +50,7 @@ define(['postmonger'], function(Postmonger) {
         });
     }
   
+    /*
     function initialize(data) {
       payload = data || {};
 
@@ -62,7 +68,7 @@ define(['postmonger'], function(Postmonger) {
         text: 'done',
         visible: true
       });
-    }
+    } */
   
     function save() {
       const phoneNumber = $('#messagingService').val();
@@ -76,5 +82,7 @@ define(['postmonger'], function(Postmonger) {
   
       connection.trigger('updateActivity', payload);
     }
+
+
   });
   

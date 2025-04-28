@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request-promise-native');
 const path = require('path');
+const routes = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,12 +28,21 @@ app.get('/config.json', (req, res) => {
 });
 
 // Serve the activity UI
+
+/*
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+}); */
+
+app.get('/', routes.index );
+app.post('/login', routes.login);
+app.post('/logout', routes.logout);
+console.log("Execution flow app 1:"); 
 
 // Lifecycle endpoints required by SFMC
 app.post('/save',     (req, res) => res.status(200).json({ message: 'Save successful' }));
+console.log("Execution flow 4:"+message); 
+
 app.post('/publish',  (req, res) => res.status(200).json({ message: 'Publish successful' }));
 app.post('/validate', (req, res) => res.status(200).json({ message: 'Validation successful' }));
 

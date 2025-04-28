@@ -9,9 +9,6 @@ define(['postmonger'], function(Postmonger) {
         { label: "Configure Message", key: "messageBody" }
     ];
     console.log("testing 1");    
-   
-    // When the page loads…
-    $(window).ready(onRender);
 
     // Journey Builder events
     connection.on('initActivity',      initialize);
@@ -21,7 +18,16 @@ define(['postmonger'], function(Postmonger) {
 
     console.log("Execution flow 2");  
 
+     // When the page loads…
+     $(window).ready(() => {
+      console.log('CustomActivity.js loaded');
+      connection.trigger('ready');
+      connection.trigger('requestTokens');
+      connection.trigger('requestEndpoints');
+    });
+
     // ---- DEBUG: fetch token on any load ----
+    /*
     function onRender() {
         // tell JB we’re ready to initialize
         connection.trigger('ready');
@@ -49,7 +55,7 @@ define(['postmonger'], function(Postmonger) {
           console.error('🛠️ [DEBUG] Genesys OAuth Error:', err);
         });
     }
-  
+  */
     
     function initialize(data) {
       payload = data || {};
@@ -69,6 +75,15 @@ define(['postmonger'], function(Postmonger) {
         visible: true
       });
     } 
+
+    function onGetTokens(tokens) {
+      console.log('SFMC tokens:', tokens);
+      // you could stash tokens.token / tokens.fuel2token if you ever need to call SFMC REST
+    }
+  
+    function onGetEndpoints(endpoints) {
+      console.log('SFMC endpoints:', endpoints);
+    }
   
     function save() {
       const phoneNumber = $('#messagingService').val();
@@ -79,10 +94,9 @@ define(['postmonger'], function(Postmonger) {
         { body: bodyValue }
       ];
       payload.metaData.isConfigured = true;
-  
+      console.log('updated payload, firing updateActivity', payload);
       connection.trigger('updateActivity', payload);
     }
-
 
   });
   

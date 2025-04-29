@@ -50,6 +50,8 @@ app.post('/publish',  activity.publish);
 
 app.post('/execute', async (req, res) => {
     try {
+
+        console.log('❗️ /execute payload:', JSON.stringify(req.body));
       // pull your four inArguments
       const inArgs    = req.body.arguments.execute.inArguments;
       const responseId = inArgs.find(a => a.responseId)?.responseId;

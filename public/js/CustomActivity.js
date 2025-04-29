@@ -61,16 +61,16 @@ define(['postmonger'], function(Postmonger) {
       console.log("testing 4");  
 
       const responseId = $('#responseId').val();
-      console.log("testing 5");    
+      console.log("testing 5"+responseId);    
 
       const phone      = $('#phone').val();
-      console.log("testing 6");
+      console.log("testing 6"+phone);
       
       const sessionId  = $('#sessionId').val();
-      console.log("testing 7"); 
+      console.log("testing 7"+sessionId); 
       
       const contactId  = $('#contactId').val();
-      console.log("testing 8");    
+      console.log("testing 8"+contactId);    
   
       payload['arguments'].execute.inArguments = [
         { "responseId": responseId,

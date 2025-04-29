@@ -30,6 +30,7 @@ define(['postmonger'], function(Postmonger) {
       payload = data || {};
 
       console.log("testing 3");    
+      console.log("payloadDetails: "+ $('#responseId').val(inArgs.find(a => a.responseId)?.responseId || ''));
   
       // Read existing inArguments if any
       $('#responseId').val(inArgs.find(a => a.responseId)?.responseId || '');
@@ -37,7 +38,8 @@ define(['postmonger'], function(Postmonger) {
       $('#sessionId').val(inArgs.find(a => a.sessionId)?.sessionId || '');
       $('#contactId').val(inArgs.find(a => a.contactId)?.contactId || '');
         
-      console.log("testing 4");    
+      console.log("testing 4");
+      
       // Enable the "Done" button
       connection.trigger('updateButton', {
         button: 'next',
@@ -56,10 +58,19 @@ define(['postmonger'], function(Postmonger) {
     }
   
     function save() {
+      console.log("testing 4");  
+
       const responseId = $('#responseId').val();
+      console.log("testing 5");    
+
       const phone      = $('#phone').val();
+      console.log("testing 6");
+      
       const sessionId  = $('#sessionId').val();
+      console.log("testing 7"); 
+      
       const contactId  = $('#contactId').val();
+      console.log("testing 8");    
   
       payload['arguments'].execute.inArguments = [
         { "responseId": responseId,

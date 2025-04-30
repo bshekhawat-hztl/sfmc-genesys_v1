@@ -28,15 +28,23 @@ define(['postmonger'], function(Postmonger) {
     
     function initialize(data) {
       payload = data || {};
-
+      
+      // 1) grab whatever inArguments were saved previously
+      const inArgs = payload.arguments?.execute?.inArguments || [];
       console.log("testing 3");    
       console.log("payloadDetails ResponseID: "+ responseId);
   
-      // Read existing inArguments if any
-      $('#responseId').val(inArgs.find(a => a.responseId)?.responseId || '');
-      $('#phone').val(inArgs.find(a => a.phone)?.phone || '');
-      $('#sessionId').val(inArgs.find(a => a.sessionId)?.sessionId || '');
-      $('#contactId').val(inArgs.find(a => a.contactId)?.contactId || '');
+      // 2) extract each field by the exact key you wrote to in save()
+      const responseId = inArgs.find(a => a.responseId)?.responseId || '';
+      const phone     = inArgs.find(a => a.phone)?.phone || '';
+      const sessionId = inArgs.find(a => a.sessionId)?.sessionId || '';
+      const contactId = inArgs.find(a => a.contactId)?.contactId || '';
+  
+      // 3) populate your UI
+      $('#responseId').val(responseId);
+      $('#phone').val(phone);
+      $('#sessionId').val(sessionId);
+      $('#contactId').val(contactId);
         
       console.log("testing 4");
       
@@ -60,6 +68,7 @@ define(['postmonger'], function(Postmonger) {
     function save() {
       console.log("testing 4");  
 
+      // read back from the UI
       const responseId = $('#responseId').val();
       console.log("testing 5"+responseId);    
 

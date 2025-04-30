@@ -72,14 +72,13 @@ define(['postmonger'], function(Postmonger) {
       const contactId  = $('#contactId').val();
       console.log("testing 8"+contactId);    
   
-      payload['arguments'].execute.inArguments = [
-        { "responseId": responseId,
-          "phone": phone,
-          "sessionId": sessionId,
-          "contactId": contactId
-        }
+      payload.arguments.execute.inArguments = [
+        { responseId },
+        { phone },
+        { sessionId },
+        { contactId }
       ];
-      payload['metaData'].isConfigured = true;
+      payload.metaData.isConfigured = true;
       console.log('updated payload, firing updateActivity', payload);
       connection.trigger('updateActivity', payload);
     }

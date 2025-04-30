@@ -31,8 +31,7 @@ define(['postmonger'], function(Postmonger) {
       
       // 1) grab whatever inArguments were saved previously
       const inArgs = payload.arguments?.execute?.inArguments || [];
-      console.log("testing 3");    
-      console.log("payloadDetails ResponseID: "+ responseId);
+      console.log("testing 3"); 
   
       // 2) extract each field by the exact key you wrote to in save()
       const responseId = inArgs.find(a => a.responseId)?.responseId || '';

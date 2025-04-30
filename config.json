@@ -15,9 +15,9 @@
         "execute": {
             "inArguments": [
                 { "responseId": "" },
-                { "phone": "{{Contact.Default.PhoneNumber}}" },
+                { "phone": "{{Contact.Default.phone}}" },
                 { "sessionId": "" },
-                { "contactId": "" }          
+                { "contactId": "{{Contact.Attribute.9D7402E8-E745-46A6-92E0-882577E38C55.contactId}}" }         
             ],
             "outArguments": [],
             "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/execute",

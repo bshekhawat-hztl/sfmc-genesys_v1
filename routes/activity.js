@@ -6,6 +6,7 @@ const GENESYS_FLOW_URL = 'https://api.mec1.pure.cloud/api/v2/flows/executions';
 const CLIENT_ID     = 'a36298ab-fed3-428c-9d1f-86e99c982b63';
 const CLIENT_SECRET = 'tJL4zU-PQpV6BHI-owOChKzE5v8M9U0WkDRfbWcU0wY';
 const FLOW_ID       = '770ea816-7ce7-4e44-ac49-b935fba7f268';
+const INTEGRATION_ID      = '65cd9bec-8fd5-45d3-a5cf-8432777b757f';
 
 module.exports = {
   
@@ -29,12 +30,16 @@ module.exports = {
     try {
       // 1) extract your inArguments
       const inArgs = (req.body.arguments?.execute?.inArguments || [])
-        .reduce((acc, curr) => ({ ...acc, ...curr }), {});
+      .reduce((acc, curr) => ({ ...acc, ...curr }), {});
+
+        const {
+        responseId,
+        phone,
+        sessionId,
+        contactId
+        } = inArgs;
       
-      const phoneNumber = inArgs.phoneNumber;
-      const messageBody = inArgs.body;
-      
-      if (!phoneNumber || !messageBody) {
+        if (!responseId || !phone || !sessionId || !contactId) {
         return res.status(400).json({ error: 'Missing phoneNumber or body' });
       }
       
@@ -54,8 +59,11 @@ module.exports = {
       const flowPayload = {
         flowId: FLOW_ID,
         inputData: {
-          'Flow.customerPhone': phoneNumber,
-          'Flow.messageBody':   messageBody,
+            'Flow.responseId':    responseId,
+            'Flow.customerPhone': phone,
+            'Flow.integrationId': INTEGRATION_ID,
+            'Flow.sessionId':     sessionId,
+            'Flow.ContactId':     contactId
           // …any other Flow.* fields you need
         }
       };

@@ -29,6 +29,7 @@ module.exports = {
     console.log('▶️ execute payload', JSON.stringify(req.body, null, 2));
     try {
       // 1) extract your inArguments
+      /*
       const inArgs = (req.body.arguments?.execute?.inArguments || [])
       .reduce((acc, curr) => ({ ...acc, ...curr }), {});
 
@@ -38,7 +39,14 @@ module.exports = {
         sessionId,
         contactId
         } = inArgs;
-      
+      */
+
+        const inArgs    = req.body.arguments.execute.inArguments;
+        const responseId = inArgs.find(a => a.responseId)?.responseId;
+        const phone      = inArgs.find(a => a.phone)?.phone;
+        const sessionId  = inArgs.find(a => a.sessionId)?.sessionId;
+        const contactId  = inArgs.find(a => a.contactId)?.contactId;
+        
         if (!responseId || !phone || !sessionId || !contactId) {
         return res.status(400).json({ error: 'Missing phoneNumber or body' });
       }

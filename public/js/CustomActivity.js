@@ -30,7 +30,7 @@ define(['postmonger'], function(Postmonger) {
       payload = data || {};
 
       console.log("testing 3");    
-      console.log("payloadDetails: "+ $('#responseId').val(inArgs.find(a => a.responseId)?.responseId || ''));
+      console.log("payloadDetails ResponseID: "+ responseId);
   
       // Read existing inArguments if any
       $('#responseId').val(inArgs.find(a => a.responseId)?.responseId || '');

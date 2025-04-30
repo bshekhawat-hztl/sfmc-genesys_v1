@@ -21,6 +21,8 @@ app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'ALLOW-FROM https://*.exacttarget.com');
   next();
 });
+// Right after you create your Express app
+app.use(bodyParser.json());
 
 // Expose config.json for Journey Builder discovery
 app.get('/config.json', (req, res) => {

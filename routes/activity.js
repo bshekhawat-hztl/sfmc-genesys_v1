@@ -11,16 +11,19 @@ const INTEGRATION_ID      = '65cd9bec-8fd5-45d3-a5cf-8432777b757f';
 module.exports = {
   
   save(req, res) {
+    console.log('🔖 save headers:', req.headers);
     console.log('🔖 save request', req.body);
     res.status(200).json({ message: 'Save successful' });
   },
   
   validate(req, res) {
+    console.log('🔖 validate headers:', req.headers);
     console.log('✅ validate request', req.body);
     res.status(200).json({ message: 'Validation successful' });
   },
   
   publish(req, res) {
+    console.log('🔖 publish headers:', req.headers);
     console.log('🚀 publish request', req.body);
     res.status(200).json({ message: 'Publish successful' });
   },
@@ -41,15 +44,31 @@ module.exports = {
         } = inArgs;
       */
 
-        const inArgs    = req.body.arguments.execute.inArguments;
+        const inArgs = req.body.arguments?.execute?.inArguments;
+        if (!Array.isArray(inArgs)) {
+            return res.status(400).json({ error: 'Invalid payload: no inArguments' });
+          }
+
         const responseId = inArgs.find(a => a.responseId)?.responseId;
         const phone      = inArgs.find(a => a.phone)?.phone;
         const sessionId  = inArgs.find(a => a.sessionId)?.sessionId;
         const contactId  = inArgs.find(a => a.contactId)?.contactId;
+
         
-        if (!responseId || !phone || !sessionId || !contactId) {
-        return res.status(400).json({ error: 'Missing phoneNumber or body' });
-      }
+        // 3) Validate all four
+        const missing = [];
+        if (!responseId) missing.push('responseId');
+        if (!phone)      missing.push('phone');
+        if (!sessionId)  missing.push('sessionId');
+        if (!contactId)  missing.push('contactId');
+        if (missing.length) {
+            return res
+            .status(400)
+            .json({ error: `Missing required inArguments: ${missing.join(', ')}` });
+        }
+
+        console.log('Parsed inArgs →', { responseId, phone, sessionId, contactId });
+
       
       // 2) get a Genesys bearer token
       const auth = await request.post({

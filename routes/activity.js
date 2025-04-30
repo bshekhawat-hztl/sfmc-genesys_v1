@@ -29,7 +29,12 @@ module.exports = {
   },
   
   async execute(req, res) {
-    console.log('▶️ execute payload', JSON.stringify(req.body, null, 2));
+
+    console.log('test 10 inside execute function');
+    console.log('🔖 execute headers:', req.headers);
+    console.log('🚀 execute request', req.body);
+
+    //console.log('▶️ execute payload', JSON.stringify(req.body, null, 2));
     try {
       // 1) extract your inArguments
       /*

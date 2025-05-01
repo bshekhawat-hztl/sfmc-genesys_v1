@@ -13,12 +13,14 @@ module.exports = {
   save(req, res) {
     console.log('🔖 save headers:', req.headers);
     console.log('🔖 save request', req.body);
+    console.log('💾 [save] full body:', JSON.stringify(req.body, null, 2));
     res.status(200).json({ message: 'Save successful' });
   },
   
   validate(req, res) {
     console.log('🔖 validate headers:', req.headers);
     console.log('✅ validate request', req.body);
+    console.log('💾 [validate] full body:', JSON.stringify(req.body, null, 2));
     res.status(200).json({ message: 'Validation successful' });
   },
   

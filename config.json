@@ -14,10 +14,10 @@
     "arguments": {
         "execute": {
             "inArguments": [
-                { "responseId": "72807fe8-393f-4776-81b9-ada574746599" },
-                { "phone": "971585150225" },
-                { "sessionId": "APIEvent-ac6cf4ee-dc26-9e2d-06d4-5c5d4db43398" },
-                { "contactId": "CI001" }         
+                { "responseId": ""                                    },
+                { "phone":      "{{Event.POC_JourneyEntryDE_v1.PhoneNumber}}" },
+                { "sessionId":  ""                                      },
+                { "contactId":  "{{Event.POC_JourneyEntryDE_v1.contactId}}" }       
             ],
             "outArguments": [],
             "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/execute",

@@ -17,7 +17,7 @@
                 { "responseId": "" },
                 { "phone": "{{Contact.Default.PhoneNumber}}" },
                 { "sessionId": "" },
-                { "contactId": "{{Contact.Attribute.5FEA0515-76E6-41B7-B3EA-BE48F6BED92B.contactId}}" }         
+                { "contactId": "{{Contact.Attribute.POC_JourneyEntryDE_v1.contactId}}" }         
             ],
             "outArguments": [],
             "url": "https://sfmc-genesys-v1-6cff12f17a1d.herokuapp.com/execute",
@@ -61,8 +61,11 @@
        }
     },
     "wizardSteps": [
-      { "label": "Configure Message", "key": "messageBody" } 
-    ],
+    {
+      "label": "Configure Activity",
+      "key":   "step1"
+    }
+  ],
     "userInterfaces": {
        "configModal": {
            "height": 600,

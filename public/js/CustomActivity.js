@@ -68,16 +68,16 @@ define(['postmonger'], function(Postmonger) {
       console.log("testing 4");  
 
       // read back from the UI
-      const responseId = $('#responseId').val();
+      const responseId = $('#responseId').val().trim();
       console.log("testing 5"+responseId);    
 
-      const phone      = $('#phone').val();
+      const phone      = $('#phone').val().trim();
       console.log("testing 6"+phone);
       
-      const sessionId  = $('#sessionId').val();
+      const sessionId  = $('#sessionId').val().trim();
       console.log("testing 7"+sessionId); 
       
-      const contactId  = $('#contactId').val();
+      const contactId  = $('#contactId').val().trim();
       console.log("testing 8"+contactId);    
   
       payload.arguments.execute.inArguments = [

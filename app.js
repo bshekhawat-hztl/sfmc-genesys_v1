@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 // To check every request coming to this app
 
 app.use((req, res, next) => {
-    console.log(`→ ${req.method} ${req.path}`);
+    console.log(`request in app.js→ ${req.method} ${req.path}`);
     next();
   });
 

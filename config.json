@@ -15,7 +15,7 @@
         "execute": {
             "inArguments": [
                 { "responseId": "" },
-                { "phone": "{{Contact.Default.phone}}" },
+                { "phone": "{{Contact.Default.PhoneNumber}}" },
                 { "sessionId": "" },
                 { "contactId": "{{Contact.Attribute.9D7402E8-E745-46A6-92E0-882577E38C55.contactId}}" }         
             ],

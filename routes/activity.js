@@ -31,24 +31,15 @@ module.exports = {
   async execute(req, res) {
 
     console.log('test 10 inside execute function');
-    console.log('🔖 execute headers:', req.headers);
-    console.log('🚀 execute request', req.body);
+    console.log('▶️ execute payload', JSON.stringify(req.body, null, 2));
+    //console.log('🔖 execute headers:', req.headers);
+    //console.log('🚀 execute request', req.body);
 
-    //console.log('▶️ execute payload', JSON.stringify(req.body, null, 2));
+    
     try {
+
       // 1) extract your inArguments
-      /*
-      const inArgs = (req.body.arguments?.execute?.inArguments || [])
-      .reduce((acc, curr) => ({ ...acc, ...curr }), {});
-
-        const {
-        responseId,
-        phone,
-        sessionId,
-        contactId
-        } = inArgs;
-      */
-
+      
         const inArgs = req.body.arguments?.execute?.inArguments;
         if (!Array.isArray(inArgs)) {
             return res.status(400).json({ error: 'Invalid payload: no inArguments' });
@@ -58,7 +49,8 @@ module.exports = {
         const phone      = inArgs.find(a => a.phone)?.phone;
         const sessionId  = inArgs.find(a => a.sessionId)?.sessionId;
         const contactId  = inArgs.find(a => a.contactId)?.contactId;
-
+        
+        console.log('Parsed inArgs →', { responseId, phone, sessionId, contactId });
         
         // 3) Validate all four
         const missing = [];
@@ -86,27 +78,24 @@ module.exports = {
         json: true
       });
       const token = auth.access_token;
-      
-      // 3) fire the flow
-      const flowPayload = {
-        flowId: FLOW_ID,
-        inputData: {
-            'Flow.responseId':    responseId,
-            'Flow.customerPhone': phone,
-            'Flow.integrationId': INTEGRATION_ID,
-            'Flow.sessionId':     sessionId,
-            'Flow.ContactId':     contactId
-          // …any other Flow.* fields you need
-        }
-      };
-      
+      console.log("Accesstoken in execution"+token);
+     
       await request.post({
         url: GENESYS_FLOW_URL,
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(flowPayload)
+        body: JSON.stringify({
+          flowId: FLOW_ID,
+          inputData: {
+            'Flow.responseId':    responseId,
+            'Flow.customerPhone': phone,
+            'Flow.integrationId':  INTEGRATION_ID,
+            'Flow.sessionId':      sessionId,
+            'Flow.ContactId':      contactId
+          }
+        })
       });
       
       console.log('✅ Genesys flow executed');

@@ -49,11 +49,14 @@ app.post('/validate', activity.validate);
 app.post('/publish',  activity.publish);
 
 // Execute activity: called at runtime by SFMC Journey
+// instead of inlining here, just delegate:
+app.post('/execute', activity.execute);
 
+/*
 app.post('/execute', async (req, res) => {
     try {
 
-        console.log('❗️ /execute payload:', JSON.stringify(req.body));
+        console.log('❗️ /execute payload:'+ JSON.stringify(req.body));
       // pull your four inArguments
       const inArgs    = req.body.arguments.execute.inArguments;
       const responseId = inArgs.find(a => a.responseId)?.responseId;
@@ -72,6 +75,7 @@ app.post('/execute', async (req, res) => {
         json: true
       });
       const accessToken = auth.access_token;
+      console.log("Execution function access token: "+accessToken);
   
       // 2. fire the flow
       await request.post({
@@ -98,7 +102,7 @@ app.post('/execute', async (req, res) => {
       return res.sendStatus(500);
     }
   });
-
+*/
 
 
 // Start server

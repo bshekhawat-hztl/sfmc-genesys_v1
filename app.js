@@ -50,13 +50,12 @@ app.post('/logout', routes.logout);
 console.log("Execution flow app 1:"); 
 
 // Lifecycle endpoints required by SFMC
+// Execute activity: called at runtime by SFMC Journey
+// instead of inlining here, just delegate to activity.js:
 
 app.post('/save',     activity.save);
 app.post('/validate', activity.validate);
 app.post('/publish',  activity.publish);
-
-// Execute activity: called at runtime by SFMC Journey
-// instead of inlining here, just delegate:
 app.post('/execute', activity.execute);
 
 /*

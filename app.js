@@ -8,6 +8,13 @@ const activity = require('./routes/activity');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// To check every request coming to this app
+
+app.use((req, res, next) => {
+    console.log(`→ ${req.method} ${req.path}`);
+    next();
+  });
+
 // Serve static UI and assets
 app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use(express.static(path.join(__dirname, 'public')));

@@ -30,7 +30,7 @@ module.exports = {
     res.status(200).json({ message: 'Publish successful' });
   },
   
- execute(req, res) {
+  async execute(req, res) {
 
     console.log('test 10 inside execute function');
     console.log('▶️ execute payload', JSON.stringify(req.body, null, 2));
@@ -70,7 +70,7 @@ module.exports = {
 
       
       // 2) get a Genesys bearer token
-     /* const auth = await request.post({
+     const auth = await request.post({
         url: GENESYS_AUTH_URL,
         form: {
           grant_type: 'client_credentials',
@@ -99,7 +99,7 @@ module.exports = {
           }
         })
       });
-      */
+      
       console.log('✅ Genesys flow executed');
       return res.sendStatus(200);
       

@@ -102,11 +102,13 @@ module.exports = {
         body: JSON.stringify({
           flowId: FLOW_ID,
           inputData: {
-            'Flow.responseId':    responseId,
-            'Flow.customerPhone': phone,
             'Flow.integrationId':  INTEGRATION_ID,
-            'Flow.sessionId':      sessionId,
-            'Flow.ContactId':      contactId
+
+        // now conditionally add everything else
+        ...(responseId && { 'Flow.responseId': responseId }),
+        ...(phone      && { 'Flow.customerPhone': phone }),
+        ...(sessionId  && { 'Flow.sessionId': sessionId }),
+        ...(contactId  && { 'Flow.ContactId': contactId })
           }
         })
       });

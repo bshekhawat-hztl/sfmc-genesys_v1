@@ -44,12 +44,13 @@ module.exports = {
       console.log('inside try block execute request');
       
       // grab it from arguments.execute.inArguments *or* top‐level inArguments
-        const inArgs = req.body.arguments?.execute?.inArguments;
+        const inArgs = req.body.arguments?.execute?.inArguments || req.body.inArguments;
         console.log('test 11');
 
+        /*
         if (!Array.isArray(inArgs) && Array.isArray(req.body.inArguments)) {
             inArgs = req.body.inArguments;
-          }
+          }*/
 
        /* if (!Array.isArray(inArgs)) {
             return res.status(400).json({ error: 'Invalid payload: no inArguments' });

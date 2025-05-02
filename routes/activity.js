@@ -41,11 +41,14 @@ module.exports = {
     try {
 
       // 1) extract your inArguments
+      console.log('inside try block execute request');
       
         const inArgs = req.body.arguments?.execute?.inArguments;
         if (!Array.isArray(inArgs)) {
             return res.status(400).json({ error: 'Invalid payload: no inArguments' });
           }
+
+        console.log('test 11');
 
         const responseId = inArgs.find(a => a.responseId)?.responseId;
         const phone      = inArgs.find(a => a.phone)?.phone;

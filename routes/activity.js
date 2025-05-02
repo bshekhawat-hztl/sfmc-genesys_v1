@@ -63,9 +63,10 @@ module.exports = {
         const sessionId  = inArgs.find(a => a.sessionId)?.sessionId;
         const contactId  = inArgs.find(a => a.contactId)?.contactId;
         
-        console.log('Parsed inArgs →', { responseId, phone, sessionId, contactId });
+        //console.log('Parsed inArgs →', { responseId, phone, sessionId, contactId });
         
         // 3) Validate all four
+        /*
         const missing = [];
         if (!responseId) missing.push('responseId');
         if (!phone)      missing.push('phone');
@@ -78,48 +79,56 @@ module.exports = {
         }
 
         console.log('Parsed inArgs →', { responseId, phone, sessionId, contactId });
+        */
 
-      
-      // 2) get a Genesys bearer token
-     const auth = await request.post({
-        url: GENESYS_AUTH_URL,
-        form: {
-          grant_type: 'client_credentials',
-          client_id: CLIENT_ID,
-          client_secret: CLIENT_SECRET
-        },
-        json: true
-      });
-      const token = auth.access_token;
-      console.log("Accesstoken in execution"+token);
-     
-      await request.post({
-        url: GENESYS_FLOW_URL,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          flowId: FLOW_ID,
-          inputData: {
-            'Flow.integrationId':  INTEGRATION_ID,
-
-        // now conditionally add everything else
-        ...(responseId && { 'Flow.responseId': responseId }),
-        ...(phone      && { 'Flow.customerPhone': phone }),
-        ...(sessionId  && { 'Flow.sessionId': sessionId }),
-        ...(contactId  && { 'Flow.ContactId': contactId })
-          }
-        })
-      });
-      
-      console.log('✅ Genesys flow executed');
-      return res.sendStatus(200);
-      
-    } catch (err) {
-      console.error('❌ execute error', err);
-      return res.status(500).json({ error: err.message || err });
-    }
-  }
+            // 3) build your Genesys payload, only adding keys that exist
+    
+        const flowPayload = {
+        flowId: FLOW_ID,
+        inputData: {
+          // integrationId is always required
+          'Flow.integrationId': INTEGRATION_ID,
   
+          // now conditionally add everything else
+          ...(responseId && { 'Flow.responseId': responseId }),
+          ...(phone      && { 'Flow.customerPhone': phone }),
+          ...(sessionId  && { 'Flow.sessionId': sessionId }),
+          ...(contactId  && { 'Flow.ContactId': contactId })
+        }
+      };
+      console.log('➡️ calling Genesys with:', JSON.stringify(flowPayload, null, 2));
+
+      // 2) get a Genesys bearer token
+      
+        const auth = await request.post({
+            url: GENESYS_AUTH_URL,
+            form: {
+            grant_type: 'client_credentials',
+            client_id: CLIENT_ID,
+            client_secret: CLIENT_SECRET
+            },
+            json: true
+        });
+        const token = auth.access_token;
+        console.log("Accesstoken in execution"+token);
+        
+        await request.post({
+            url: GENESYS_FLOW_URL,
+            headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+            },
+        body: JSON.stringify(flowPayload)
+        
+        });
+        
+        console.log('✅ Genesys flow executed');
+        return res.sendStatus(200);
+        
+        } catch (err) {
+        console.error('❌ execute error', err);
+        return res.status(500).json({ error: err.message || err });
+        }
+    }
+    
 };

@@ -44,9 +44,9 @@ module.exports = {
       console.log('inside try block execute request');
       
         const inArgs = req.body.arguments?.execute?.inArguments;
-        if (!Array.isArray(inArgs)) {
+       /* if (!Array.isArray(inArgs)) {
             return res.status(400).json({ error: 'Invalid payload: no inArguments' });
-          }
+          }*/
 
         console.log('test 11');
 

@@ -45,43 +45,12 @@ module.exports = {
       
       // grab it from arguments.execute.inArguments *or* top‐level inArguments
         const inArgs = req.body.arguments?.execute?.inArguments || req.body.inArguments;
-        console.log('test 11');
-
-        /*
-        if (!Array.isArray(inArgs) && Array.isArray(req.body.inArguments)) {
-            inArgs = req.body.inArguments;
-          }*/
-
-       /* if (!Array.isArray(inArgs)) {
-            return res.status(400).json({ error: 'Invalid payload: no inArguments' });
-          }*/
-
-        console.log('test 12');
 
         const responseId = inArgs.find(a => a.responseId)?.responseId;
         const phone      = inArgs.find(a => a.phone)?.phone;
         const sessionId  = inArgs.find(a => a.sessionId)?.sessionId;
         const contactId  = inArgs.find(a => a.contactId)?.contactId;
         
-        //console.log('Parsed inArgs →', { responseId, phone, sessionId, contactId });
-        
-        // 3) Validate all four
-        /*
-        const missing = [];
-        if (!responseId) missing.push('responseId');
-        if (!phone)      missing.push('phone');
-        if (!sessionId)  missing.push('sessionId');
-        if (!contactId)  missing.push('contactId');
-        if (missing.length) {
-            return res
-            .status(400)
-            .json({ error: `Missing required inArguments: ${missing.join(', ')}` });
-        }
-
-        console.log('Parsed inArgs →', { responseId, phone, sessionId, contactId });
-        */
-
-            // 3) build your Genesys payload, only adding keys that exist
     
         const flowPayload = {
         flowId: FLOW_ID,

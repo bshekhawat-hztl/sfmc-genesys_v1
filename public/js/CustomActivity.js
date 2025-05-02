@@ -31,8 +31,7 @@ define(['postmonger'], function(Postmonger) {
       
       // 1) grab whatever inArguments were saved previously
       const inArgs = payload.arguments?.execute?.inArguments || [];
-      console.log("testing 3"); 
-  
+    
       // 2) extract each field by the exact key you wrote to in save()
       const responseId = inArgs.find(a => a.responseId)?.responseId || '';
       const phone     = inArgs.find(a => a.phone)?.phone || '';
@@ -44,8 +43,6 @@ define(['postmonger'], function(Postmonger) {
       $('#phone').val(phone);
       $('#sessionId').val(sessionId);
       $('#contactId').val(contactId);
-        
-      console.log("testing 4");
       
       // Enable the "Done" button
       connection.trigger('updateButton', {
@@ -68,17 +65,13 @@ define(['postmonger'], function(Postmonger) {
       console.log("testing 4");  
 
       // read back from the UI
-      const responseId = $('#responseId').val().trim();
-      console.log("testing 5"+responseId);    
+      const responseId = $('#responseId').val().trim(); 
 
       const phone      = $('#phone').val().trim();
-      console.log("testing 6"+phone);
       
       const sessionId  = $('#sessionId').val().trim();
-      console.log("testing 7"+sessionId); 
       
-      const contactId  = $('#contactId').val().trim();
-      console.log("testing 8"+contactId);    
+      const contactId  = $('#contactId').val().trim(); 
   
       payload.arguments.execute.inArguments = [
         { responseId },

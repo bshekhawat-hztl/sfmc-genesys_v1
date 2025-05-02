@@ -39,11 +39,6 @@ app.get('/config.json', (req, res) => {
 
 // Serve the activity UI
 
-/*
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-}); */
-
 app.get('/', routes.index );
 app.post('/login', routes.login);
 app.post('/logout', routes.logout);
